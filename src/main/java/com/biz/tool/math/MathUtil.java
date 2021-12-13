@@ -18,4 +18,34 @@ public class MathUtil {
         }
         return a + b;
     }
+
+    public static double add(Double a, Double b) {
+        if (Objects.isNull(a)) {
+            a = 0D;
+        }
+        if (Objects.isNull(b)) {
+            b = 0D;
+        }
+        return a + b;
+    }
+
+    public static float add(Float a, Float b) {
+        if (Objects.isNull(a)) {
+            a = 0F;
+        }
+        if (Objects.isNull(b)) {
+            b = 0F;
+        }
+        return a + b;
+    }
+
+    public static long add(Long a, Long b) {
+        if (Objects.isNull(a)) {
+            a = 0L;
+        }
+        if (Objects.isNull(b)) {
+            b = 0L;
+        }
+        return a + b;
+    }
 }
