@@ -20,9 +20,6 @@ public class FileUtil {
        return ResourceUtils.getFile("classpath:"+path);
     }
 
-
-
-
     public static File downFile(InputStream is, String downPath,String fileName) {
         String filePath = getFilePath(downPath, fileName);
         File file = new File(downPath);
