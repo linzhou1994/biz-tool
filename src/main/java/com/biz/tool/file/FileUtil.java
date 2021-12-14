@@ -16,11 +16,27 @@ import java.io.*;
 public class FileUtil {
     private static final String DEFAULT_PATH = "src/main/resources/httpClient";
 
-    public static File getFile(String path) throws FileNotFoundException {
-       return ResourceUtils.getFile("classpath:"+path);
+    public static byte[] getFileBytes(File file) throws IOException {
+        FileInputStream fis = new FileInputStream(file);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream(1000);
+
+        byte[] b = new byte[1000];
+        int n;
+        while ((n = fis.read(b)) != -1) {
+            bos.write(b, 0, n);
+
+        }
+
+        fis.close();
+        bos.close();
+        return bos.toByteArray();
     }
 
-    public static File downFile(InputStream is, String downPath,String fileName) {
+    public static File getFile(String path) throws FileNotFoundException {
+        return ResourceUtils.getFile("classpath:" + path);
+    }
+
+    public static File downFile(InputStream is, String downPath, String fileName) {
         String filePath = getFilePath(downPath, fileName);
         File file = new File(downPath);
         if (!file.isDirectory()) {
@@ -56,7 +72,7 @@ public class FileUtil {
         }
         String fileName = file.getOriginalFilename();
 
-        return downFile(file.getInputStream(),path,fileName);
+        return downFile(file.getInputStream(), path, fileName);
     }
 
     /**
@@ -74,7 +90,7 @@ public class FileUtil {
     }
 
 
-    private static String getFilePath( String path,String fileName) {
+    private static String getFilePath(String path, String fileName) {
         if (StringUtils.isBlank(path)) {
             return fileName;
         }
