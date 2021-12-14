@@ -1,11 +1,14 @@
 package com.biz.tool.file;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.MediaType;
+import org.springframework.http.MediaTypeFactory;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.util.Optional;
 
 /**
  * @author linzhou
@@ -85,8 +88,15 @@ public class FileUtil {
     public static MockMultipartFile getMockMultipartFile(File file) throws IOException {
         //如果是文件下载
         InputStream is = new FileInputStream(file);
+        String fileName = file.getName();
+
         //创建文件
-        return new MockMultipartFile(file.getName(), is);
+        return new MockMultipartFile(fileName,fileName,getContentType(fileName), is);
+    }
+
+    public static String getContentType(String fileName){
+        Optional<MediaType> mediaType = MediaTypeFactory.getMediaType(fileName);
+        return mediaType.orElse(MediaType.APPLICATION_OCTET_STREAM).toString();
     }
 
 
