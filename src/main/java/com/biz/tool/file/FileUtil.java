@@ -8,6 +8,7 @@ import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -20,19 +21,15 @@ public class FileUtil {
     private static final String DEFAULT_PATH = "src/main/resources/httpClient";
 
     public static byte[] getFileBytes(File file) throws IOException {
-        FileInputStream fis = new FileInputStream(file);
-        ByteArrayOutputStream bos = new ByteArrayOutputStream(1000);
-
-        byte[] b = new byte[1000];
-        int n;
-        while ((n = fis.read(b)) != -1) {
-            bos.write(b, 0, n);
-
+        try (FileInputStream fis = new FileInputStream(file);
+             ByteArrayOutputStream bos = new ByteArrayOutputStream(1000)){
+            byte[] b = new byte[1000];
+            int n;
+            while ((n = fis.read(b)) != -1) {
+                bos.write(b, 0, n);
+            }
+            return bos.toByteArray();
         }
-
-        fis.close();
-        bos.close();
-        return bos.toByteArray();
     }
 
     public static File getFile(String path) throws FileNotFoundException {
@@ -46,18 +43,22 @@ public class FileUtil {
             //递归生成文件夹
             file.mkdirs();
         }
-        try {
-            FileOutputStream fos = new FileOutputStream(filePath);
+        try(FileOutputStream fos = new FileOutputStream(filePath)) {
             int len;
             byte[] bytes = new byte[4096];
             while ((len = is.read(bytes)) != -1) {
                 fos.write(bytes, 0, len);
             }
             fos.flush();
-            is.close();
-            fos.close();
         } catch (Exception ex) {
             return null;
+        }finally {
+            try {
+                if (Objects.nonNull(is)){
+                    is.close();
+                }
+            } catch (IOException e) {
+            }
         }
         return new File(filePath);
     }
