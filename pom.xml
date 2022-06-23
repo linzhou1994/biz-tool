@@ -6,7 +6,11 @@
 
     <groupId>com.biz.tool</groupId>
     <artifactId>biz-tool</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>java-utils</module>
+    </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

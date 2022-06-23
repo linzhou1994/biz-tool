@@ -1,4 +1,4 @@
-package com.biz.tool.math;
+package com.java.utils.math;
 
 import java.util.Objects;
 

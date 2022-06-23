@@ -1,4 +1,4 @@
-package com.biz.tool.file;
+package com.java.utils.file;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.MediaType;

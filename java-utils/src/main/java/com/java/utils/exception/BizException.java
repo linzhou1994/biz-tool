@@ -1,4 +1,4 @@
-package com.biz.tool.assertutil;
+package com.java.utils.exception;
 
 /**
  * ////////////////////////////////////////////////////////////////////
@@ -33,33 +33,33 @@ package com.biz.tool.assertutil;
  * //                 不见满街漂亮妹，哪个归得程序员?                     //
  * ////////////////////////////////////////////////////////////////////
  *
- * @date : 2021/12/12 23:52
+ * @date : 2021/12/12 23:53
  * @author: linzhou
- * @description : ErrorCode
+ * @description : BizException
  */
-public class ErrorCode {
-    public static final ErrorCode DEFAULT_ERROR= new ErrorCode("000000","系统未知异常");
-    private String code;
-    private String msg;
+public class BizException extends Exception{
+    private ErrorCode errorCode;
 
-    public ErrorCode(String code, String msg) {
-        this.code = code;
-        this.msg = msg;
+    private Object[] param;
+
+    public BizException(ErrorCode errorCode,Object... param) {
+        super(getErrorMsg(errorCode.getMsg(),param));
+        this.errorCode = errorCode;
+        this.param = param;
     }
 
     public String getCode() {
-        return code;
+        return errorCode.getCode();
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    private static  String getErrorMsg(String str, Object... objects) {
+        String rlt = str;
+        if (objects != null) {
+            for (Object object : objects) {
+                rlt = rlt.replaceFirst("\\[.*?]", object == null ? "null" : object.toString());
+            }
+        }
+        return rlt;
     }
 
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
 }

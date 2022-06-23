@@ -1,4 +1,4 @@
-package com.biz.tool.collection;
+package com.java.utils.collection;
 
 
 import org.apache.commons.collections4.CollectionUtils;
