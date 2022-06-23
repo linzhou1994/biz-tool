@@ -28,7 +28,12 @@ public class DubboTraceInfoAttachmentFilter implements Filter {
         Object resultValue = result.getValue();
         long endTime = System.currentTimeMillis();
         long runTime = endTime - startTime;
-        log.info("dubbo url:{},runTime:{}\n params:{}",url,runTime);
+        if (result.hasException()){
+            log.info("dubbo url:{},runTime:{}\n params:{}\nresult:{}",url,runTime,params,resultValue,result.getException());
+        }else {
+            log.info("dubbo url:{},runTime:{}\n params:{}\nresult:{}",url,runTime,params,resultValue);
+        }
+
         return result;
     }
 }

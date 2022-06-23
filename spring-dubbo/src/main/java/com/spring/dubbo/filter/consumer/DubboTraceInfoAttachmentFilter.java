@@ -5,8 +5,6 @@ import com.alibaba.dubbo.common.extension.Activate;
 import com.alibaba.dubbo.rpc.*;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.UUID;
-
 /**
  * @author linzhou
  * @ClassName DubboTraceInfoAttachmentFilter.java
@@ -21,10 +19,20 @@ public class DubboTraceInfoAttachmentFilter implements Filter {
 
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-        String traceId = UUID.randomUUID().toString();
-        log.info("Attachment traceId = {}", traceId);
-
-        RpcContext.getContext().setAttachment("traceId", traceId);
-        return invoker.invoke(invocation);
+        long startTime = System.currentTimeMillis();
+        Result result = invoker.invoke(invocation);
+        Object[] params = invocation.getArguments();
+        Class<?> anInterface = invoker.getInterface();
+        String methodName = invocation.getMethodName();
+        String url = anInterface.getName()+"."+methodName;
+        Object resultValue = result.getValue();
+        long endTime = System.currentTimeMillis();
+        long runTime = endTime - startTime;
+        if (result.hasException()){
+            log.info("dubbo url:{},runTime:{}\n params:{}\nresult:{}",url,runTime,params,resultValue,result.getException());
+        }else {
+            log.info("dubbo url:{},runTime:{}\n params:{}\nresult:{}",url,runTime,params,resultValue);
+        }
+        return result;
     }
 }
