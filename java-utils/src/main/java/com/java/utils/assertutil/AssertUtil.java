@@ -75,7 +75,6 @@ public class AssertUtil {
             code = SysErrorCode.DEFAULT_ERROR;
         }
         if (!as) {
-            String errorMsg = getErrorMsg(code.getMsg(), org);
             BizException bizException = new BizException(code,org);
             LOGGER.warn("", bizException);
             throw bizException;
