@@ -1,4 +1,4 @@
-package com.biz.tool.spring.http;
+package com.spring.utils.http;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
