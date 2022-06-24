@@ -1,6 +1,7 @@
 package com.java.utils.assertutil;
 
 import com.java.utils.exception.BizException;
+import com.java.utils.exception.ErrorCode;
 import com.java.utils.exception.SysErrorCode;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -22,55 +23,55 @@ public class AssertUtil {
     public static final Logger LOGGER = LoggerFactory.getLogger(AssertUtil.class);
 
 
-    public static void isBlank(String str, SysErrorCode code, Object... org) throws BizException {
+    public static void isBlank(String str, ErrorCode code, Object... org) throws BizException {
         isTrue(StringUtils.isBlank(str), code, org);
     }
 
-    public static void isNotBlank(String str, SysErrorCode code, Object... org) throws BizException {
+    public static void isNotBlank(String str, ErrorCode code, Object... org) throws BizException {
         isTrue(StringUtils.isNotBlank(str), code, org);
     }
 
-    public static void isEmpty(String str, SysErrorCode code, Object... org) throws BizException {
+    public static void isEmpty(String str, ErrorCode code, Object... org) throws BizException {
         isTrue(StringUtils.isEmpty(str), code, org);
     }
 
-    public static void isNotEmpty(String str, SysErrorCode code, Object... org) throws BizException {
+    public static void isNotEmpty(String str, ErrorCode code, Object... org) throws BizException {
         isTrue(StringUtils.isNotEmpty(str), code, org);
     }
 
-    public static void isNotNull(Object o, SysErrorCode code, Object... org) throws BizException {
+    public static void isNotNull(Object o, ErrorCode code, Object... org) throws BizException {
         isTrue(o != null, code, org);
     }
 
-    public static void isNull(Object o, SysErrorCode code, Object... org) throws BizException {
+    public static void isNull(Object o, ErrorCode code, Object... org) throws BizException {
         isTrue(o == null, code, org);
     }
 
-    public static void isNotEmpty(Collection c, SysErrorCode code, Object... org) throws BizException {
+    public static void isNotEmpty(Collection c, ErrorCode code, Object... org) throws BizException {
         isTrue(CollectionUtils.isNotEmpty(c), code, org);
     }
 
-    public static void isEmpty(Collection c, SysErrorCode code, Object... org) throws BizException {
+    public static void isEmpty(Collection c, ErrorCode code, Object... org) throws BizException {
         isTrue(CollectionUtils.isEmpty(c), code, org);
     }
 
-    public static void isMapNotEmpty(Map m, SysErrorCode code, Object... org) throws BizException {
+    public static void isMapNotEmpty(Map m, ErrorCode code, Object... org) throws BizException {
         isTrue(m != null && !m.isEmpty(), code, org);
     }
 
-    public static void isMapEmpty(Map m, SysErrorCode code, Object... org) throws BizException {
+    public static void isMapEmpty(Map m, ErrorCode code, Object... org) throws BizException {
         isTrue(m == null || m.isEmpty(), code, org);
     }
 
-    public static void isEquals(Object o1, Object o2, SysErrorCode code, Object... org) throws BizException {
+    public static void isEquals(Object o1, Object o2, ErrorCode code, Object... org) throws BizException {
         isTrue(Objects.equals(o1,o2), code, org);
     }
-    public static void isNotEquals(Object o1, Object o2, SysErrorCode code, Object... org) throws BizException {
+    public static void isNotEquals(Object o1, Object o2, ErrorCode code, Object... org) throws BizException {
         isTrue(!Objects.equals(o1,o2), code, org);
     }
 
 
-    public static void isTrue(boolean as, SysErrorCode code, Object... org) throws BizException {
+    public static void isTrue(boolean as, ErrorCode code, Object... org) throws BizException {
         if (code == null) {
             code = SysErrorCode.DEFAULT_ERROR;
         }
