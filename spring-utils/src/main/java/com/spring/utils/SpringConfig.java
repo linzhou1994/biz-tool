@@ -1,5 +1,7 @@
 package com.spring.utils;
 
+import com.spring.utils.bean.SpringUtil;
+import com.spring.utils.controller.advice.GlobalExceptionHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,5 +17,10 @@ public class SpringConfig {
     @Bean
     public SpringUtil getSpringUtil(){
         return new SpringUtil();
+    }
+
+    @Bean
+    public GlobalExceptionHandler getGlobalExceptionHandler(){
+        return new GlobalExceptionHandler();
     }
 }

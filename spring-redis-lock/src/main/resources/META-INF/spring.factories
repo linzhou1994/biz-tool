@@ -1,0 +1,2 @@
+#自动配置
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.srping.redis.lock.config.RedisDistributedLockConfig

@@ -12,6 +12,8 @@
         <module>java-utils</module>
         <module>spring-utils</module>
         <module>spring-dubbo</module>
+        <module>spring-lock</module>
+        <module>spring-redis-lock</module>
     </modules>
 
     <parent>

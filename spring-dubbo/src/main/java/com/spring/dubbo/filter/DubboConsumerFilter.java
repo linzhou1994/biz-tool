@@ -1,6 +1,7 @@
-package com.spring.dubbo.filter.provider;
+package com.spring.dubbo.filter;
 
 
+import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.Activate;
 import com.alibaba.dubbo.rpc.*;
 import lombok.extern.slf4j.Slf4j;
@@ -12,9 +13,9 @@ import lombok.extern.slf4j.Slf4j;
  * @Description 服务消费方：附加trace_id的过滤器
  */
 
-@Activate(group = {"provider"})
+@Activate(group = {Constants.CONSUMER,Constants.PROVIDER})
 @Slf4j
-public class DubboTraceInfoAttachmentFilter implements Filter {
+public class DubboConsumerFilter implements Filter {
 
 
     @Override
@@ -33,7 +34,6 @@ public class DubboTraceInfoAttachmentFilter implements Filter {
         }else {
             log.info("dubbo url:{},runTime:{}\n params:{}\nresult:{}",url,runTime,params,resultValue);
         }
-
         return result;
     }
 }

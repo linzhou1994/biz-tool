@@ -2,6 +2,9 @@ package com.spring.utils.http;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.context.request.ServletWebRequest;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedInputStream;
@@ -15,6 +18,10 @@ import java.net.URLEncoder;
  * @author
  */
 public class ResponseUtil {
+
+    public static HttpServletResponse getResponse(){
+        return ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getResponse();
+    }
 
     public static void downloadFile(HttpServletResponse response, String filePath, String fileName) throws IOException {
         BufferedInputStream bis = null;
