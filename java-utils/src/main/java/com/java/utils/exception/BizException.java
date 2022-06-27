@@ -52,6 +52,10 @@ public class BizException extends Exception{
         return errorCode.getCode();
     }
 
+    public String getErrorMessage(){
+        return getErrorMsg(errorCode.getMsg(),param);
+    }
+
     private static  String getErrorMsg(String str, Object... objects) {
         String rlt = str;
         if (objects != null) {

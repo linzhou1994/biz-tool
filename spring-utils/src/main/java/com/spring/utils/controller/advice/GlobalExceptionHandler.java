@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({BizException.class})
     @ResponseBody
     public Result handleIllegalArgumentException(BizException e, HttpServletRequest request) {
-        log.error("BizException url:{} message:{}", request.getRequestURI(), e.getMessage(), e);
+        log.error("BizException url:{} message:{}", request.getRequestURI(), e.getErrorMessage(), e);
         return Result.error(e);
     }
 

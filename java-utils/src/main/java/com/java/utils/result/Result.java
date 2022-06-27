@@ -87,7 +87,7 @@ public class Result<T> implements Serializable {
         Result result = new Result();
         result.setSuccess(false);
         result.setCode(e.getCode());
-        result.setMessage(e.getMessage());
+        result.setMessage(e.getErrorMessage());
         return result;
     }
 
