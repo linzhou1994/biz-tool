@@ -2,7 +2,7 @@ package com.spring.utils.controller.advice;
 
 
 import com.java.utils.exception.BizException;
-import com.java.utils.result.Result;
+import com.spring.utils.http.result.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

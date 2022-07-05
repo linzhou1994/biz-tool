@@ -1,7 +1,6 @@
-package com.java.utils.result;
+package com.spring.utils.http.result;
 
 import com.java.utils.exception.BizException;
-import com.java.utils.exception.ErrorCode;
 
 import java.io.Serializable;
 
