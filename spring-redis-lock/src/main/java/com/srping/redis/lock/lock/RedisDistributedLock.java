@@ -1,8 +1,8 @@
 package com.srping.redis.lock.lock;
 
+import com.spring.lock.DistributedLock;
+import com.spring.lock.param.LockParam;
 import com.srping.redis.lock.result.RedisLockResult;
-import com.wwl.zouwu.oms.framework.lock.DistributedLock;
-import com.wwl.zouwu.oms.framework.lock.param.LockParam;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;

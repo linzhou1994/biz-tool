@@ -1,6 +1,6 @@
 package com.srping.redis.lock.result;
 
-import com.wwl.zouwu.oms.framework.lock.result.BaseLockResult;
+import com.spring.lock.result.BaseLockResult;
 import org.redisson.api.RLock;
 
 import java.io.IOException;
