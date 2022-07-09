@@ -42,7 +42,10 @@ public class BizException extends Exception{
 
     private Object[] param;
 
-    public BizException(ErrorCode errorCode,Object... param) {
+    public BizException() {
+    }
+
+    public BizException(ErrorCode errorCode, Object... param) {
         super(getErrorMsg(errorCode.getMsg(),param));
         this.errorCode = errorCode;
         this.param = param;
