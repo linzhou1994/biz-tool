@@ -30,11 +30,6 @@
             <version>5.2.12.RELEASE</version>
             <!--      <scope>provided</scope>-->
         </dependency>
-        <dependency>
-            <groupId>com.wwl.zouwu.oms.framework</groupId>
-            <artifactId>lock-starter</artifactId>
-            <version>0.0.1-lock-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
 </project>
