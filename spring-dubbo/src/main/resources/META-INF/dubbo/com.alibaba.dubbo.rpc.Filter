@@ -1,1 +1,1 @@
-dubboLogFilter=com.spring.dubbo.filter.DubboConsumerFilter
+dubboLogFilter=com.spring.dubbo.filter.DubboFilter

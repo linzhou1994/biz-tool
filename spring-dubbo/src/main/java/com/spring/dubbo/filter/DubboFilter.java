@@ -13,26 +13,28 @@ import lombok.extern.slf4j.Slf4j;
  * @Description 服务消费方：附加trace_id的过滤器
  */
 
-@Activate(group = {Constants.CONSUMER,Constants.PROVIDER})
+@Activate(group = {Constants.CONSUMER, Constants.PROVIDER})
 @Slf4j
-public class DubboConsumerFilter implements Filter {
+public class DubboFilter implements Filter {
 
 
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
         long startTime = System.currentTimeMillis();
-        Result result = invoker.invoke(invocation);
+
+        Result result = DubboFilterHandlerManager.filter(invoker, invocation);
+
         Object[] params = invocation.getArguments();
         Class<?> anInterface = invoker.getInterface();
         String methodName = invocation.getMethodName();
-        String url = anInterface.getName()+"."+methodName;
+        String url = anInterface.getName() + "." + methodName;
         Object resultValue = result.getValue();
         long endTime = System.currentTimeMillis();
         long runTime = endTime - startTime;
-        if (result.hasException()){
-            log.info("dubbo url:{},runTime:{}\n params:{}\nresult:{}",url,runTime,params,resultValue,result.getException());
-        }else {
-            log.info("dubbo url:{},runTime:{}\n params:{}\nresult:{}",url,runTime,params,resultValue);
+        if (result.hasException()) {
+            log.info("dubbo url:{},runTime:{}\n params:{}\nresult:{}", url, runTime, params, resultValue, result.getException());
+        } else {
+            log.info("dubbo url:{},runTime:{}\n params:{}\nresult:{}", url, runTime, params, resultValue);
         }
         return result;
     }
