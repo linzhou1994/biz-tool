@@ -59,4 +59,24 @@ public class EnumUtil {
         }
         return null;
     }
+
+    public static  <T extends Enum> T getEnumByName(Class<T> tClass , String enumName){
+
+        T[] enumConstants = tClass.getEnumConstants();
+
+        for (T enumItem : enumConstants) {
+            String name = null;
+            try {
+                name = tClass.getMethod("name").invoke(enumItem).toString();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (Objects.equals(name,enumName)){
+                return enumItem;
+            }
+        }
+        return null;
+    }
+
+
 }
