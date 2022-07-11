@@ -1,5 +1,6 @@
 package com.java.utils.assertutil;
 
+import com.java.utils.enums.EnumUtil;
 import com.java.utils.exception.BizException;
 import com.java.utils.exception.ErrorCode;
 import com.java.utils.exception.SysErrorCode;
@@ -21,6 +22,11 @@ import java.util.Objects;
  */
 public class AssertUtil {
     public static final Logger LOGGER = LoggerFactory.getLogger(AssertUtil.class);
+
+    public static void inEnum(Class<? extends Enum<?>> clazz, String code, ErrorCode errorCode, Object... org) throws BizException {
+        Enum enumByCode = EnumUtil.getEnumByCode(clazz, code);
+        isNotNull(enumByCode, errorCode, org);
+    }
 
 
     public static void isBlank(String str, ErrorCode code, Object... org) throws BizException {
@@ -64,10 +70,11 @@ public class AssertUtil {
     }
 
     public static void isEquals(Object o1, Object o2, ErrorCode code, Object... org) throws BizException {
-        isTrue(Objects.equals(o1,o2), code, org);
+        isTrue(Objects.equals(o1, o2), code, org);
     }
+
     public static void isNotEquals(Object o1, Object o2, ErrorCode code, Object... org) throws BizException {
-        isTrue(!Objects.equals(o1,o2), code, org);
+        isTrue(!Objects.equals(o1, o2), code, org);
     }
 
 
@@ -76,7 +83,7 @@ public class AssertUtil {
             code = SysErrorCode.DEFAULT_ERROR;
         }
         if (!as) {
-            BizException bizException = new BizException(code,org);
+            BizException bizException = new BizException(code, org);
             LOGGER.warn("", bizException);
             throw bizException;
         }
