@@ -26,7 +26,7 @@ public class MqSendTest  extends BaseTest {
     public void contextLoads() {
         User user = new User();
         user.setName("linzhou");
-        user.setAge(18);
+        user.setAge(100);
         rocketMQTemplate.syncSend("lz" + ":" + "test",user);
     }
 }
