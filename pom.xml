@@ -14,6 +14,7 @@
         <module>spring-dubbo</module>
         <module>spring-lock</module>
         <module>spring-redis-lock</module>
+        <module>spring-boot-rocketmq</module>
     </modules>
 
     <parent>

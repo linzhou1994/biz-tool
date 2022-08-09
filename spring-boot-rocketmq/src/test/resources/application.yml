@@ -1,0 +1,16 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /demo
+rocketmq:
+  # 多个用;隔开
+  name-server: www.linzhou.link:9876
+  producer:
+    # 生产组
+    group: demo-group
+    # 发送消息超时时间，默认 3000
+    sendMessageTimeout: 3000
+    # 发送消息失败重试次数，默认2
+    retryTimesWhenSendFailed: 2
+    # 发送异步消息失败重试次数，默认2
+    retryTimesWhenSendAsyncFailed: 2
