@@ -1,10 +1,14 @@
 package com.spring.utils.http.result;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.spring.utils.bean.BeanCopy;
 import com.spring.utils.http.request.PageRequest;
+import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * CopyRight : <company domain>
@@ -32,6 +36,9 @@ public class PageResult<T> {
     private Long pageSize;
 
     private List<T> data;
+
+    public PageResult() {
+    }
 
     public PageResult(Long total, Long curPage, Long pageSize, List<T> data) {
         this.total = total;
@@ -104,9 +111,31 @@ public class PageResult<T> {
      * @param <E>
      * @return
      */
-    public static  <E> PageResult<E> build(PageResult pageResult,Class<E> eClass) {
+    public static <E> PageResult<E> build(PageResult pageResult, Class<E> eClass) {
         List<E> resultData = BeanCopy.copyList(pageResult.getData(), eClass);
         return new PageResult<E>(pageResult.getTotal(), pageResult.getCurPage(), pageResult.getPageSize(), resultData);
+    }
+
+    /**
+     * 构建返回对象
+     */
+    public static <S, T> PageResult<T> build(IPage<S> iPage, Class<T> clazz) {
+        PageResult<T> pageResult = new PageResult<>();
+        pageResult.setCurPage(iPage.getCurrent());
+        pageResult.setPageSize(iPage.getSize());
+        pageResult.setTotal(iPage.getTotal());
+        // 构建记录
+        List<S> records = iPage.getRecords();
+        if (!CollectionUtils.isEmpty(records)) {
+            // 复制对象
+            pageResult.setData(records.stream()
+                    .map(record -> BeanCopy.copy(record, clazz))
+                    .collect(Collectors.toList())
+            );
+        } else {
+            pageResult.setData(new ArrayList<>());
+        }
+        return pageResult;
     }
 
 

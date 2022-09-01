@@ -17,6 +17,7 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <mybatis-plus.version>3.4.1</mybatis-plus.version>
     </properties>
 
 
@@ -83,6 +84,13 @@
             <artifactId>lombok</artifactId>
             <version>1.18.22</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- mybatis-plus -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
         </dependency>
     </dependencies>
 
