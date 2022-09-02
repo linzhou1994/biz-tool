@@ -24,7 +24,7 @@ public class AssertUtil {
     public static final Logger LOGGER = LoggerFactory.getLogger(AssertUtil.class);
 
     public static void inEnum(Class<? extends Enum<?>> clazz, String code, ErrorCode errorCode, Object... org) throws BizException {
-        Enum enumByCode = EnumUtil.getEnumByCode(clazz, code);
+        Enum enumByCode = EnumUtil.getEnumByCode(code, clazz);
         isNotNull(enumByCode, errorCode, org);
     }
 

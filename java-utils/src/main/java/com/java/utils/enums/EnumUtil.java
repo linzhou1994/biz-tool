@@ -42,7 +42,7 @@ import java.util.Objects;
  */
 public class EnumUtil {
 
-    public static  <T extends Enum> T getEnumByCode(Class<T> tClass , Object code){
+    public static  <T extends Enum> T getEnumByCode(Object code,Class<T> tClass){
 
         T[] enumConstants = tClass.getEnumConstants();
 
@@ -60,7 +60,7 @@ public class EnumUtil {
         return null;
     }
 
-    public static  <T extends Enum> T getEnumByName(Class<T> tClass , String enumName){
+    public static  <T extends Enum> T getEnumByName(String enumName,Class<T> tClass){
 
         T[] enumConstants = tClass.getEnumConstants();
 
