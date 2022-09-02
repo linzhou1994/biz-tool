@@ -29,7 +29,7 @@ public class PageResult<T> {
     /**
      * 当前页码
      */
-    private Long curPage;
+    private Long pageNum;
     /**
      * 每页大小
      */
@@ -40,9 +40,9 @@ public class PageResult<T> {
     public PageResult() {
     }
 
-    public PageResult(Long total, Long curPage, Long pageSize, List<T> data) {
+    public PageResult(Long total, Long pageNum, Long pageSize, List<T> data) {
         this.total = total;
-        this.curPage = curPage;
+        this.pageNum = pageNum;
         this.pageSize = pageSize;
         this.data = data;
     }
@@ -55,12 +55,12 @@ public class PageResult<T> {
         this.total = total;
     }
 
-    public Long getCurPage() {
-        return curPage;
+    public Long getPageNum() {
+        return pageNum;
     }
 
-    public void setCurPage(Long curPage) {
-        this.curPage = curPage;
+    public void setPageNum(Long pageNum) {
+        this.pageNum = pageNum;
     }
 
     public Long getPageSize() {
@@ -87,7 +87,7 @@ public class PageResult<T> {
      * @return
      */
     public static <E> PageResult<E> buildEmpty(PageRequest pageRequest) {
-        return new PageResult<E>(0L, pageRequest.getCurPage(), pageRequest.getPageSize(), Collections.emptyList());
+        return new PageResult<E>(0L, pageRequest.getPageNum(), pageRequest.getPageSize(), Collections.emptyList());
     }
 
     /**
@@ -100,7 +100,7 @@ public class PageResult<T> {
      * @return
      */
     public static <E> PageResult<E> build(PageRequest pageRequest, Long total, List<E> data) {
-        return new PageResult<E>(total, pageRequest.getCurPage(), pageRequest.getPageSize(), data);
+        return new PageResult<E>(total, pageRequest.getPageNum(), pageRequest.getPageSize(), data);
     }
 
     /**
@@ -113,7 +113,7 @@ public class PageResult<T> {
      */
     public static <E> PageResult<E> build(PageResult pageResult, Class<E> eClass) {
         List<E> resultData = BeanCopy.copyList(pageResult.getData(), eClass);
-        return new PageResult<E>(pageResult.getTotal(), pageResult.getCurPage(), pageResult.getPageSize(), resultData);
+        return new PageResult<E>(pageResult.getTotal(), pageResult.getPageNum(), pageResult.getPageSize(), resultData);
     }
 
     /**
@@ -121,7 +121,7 @@ public class PageResult<T> {
      */
     public static <S, T> PageResult<T> build(IPage<S> iPage, Class<T> clazz) {
         PageResult<T> pageResult = new PageResult<>();
-        pageResult.setCurPage(iPage.getCurrent());
+        pageResult.setPageNum(iPage.getCurrent());
         pageResult.setPageSize(iPage.getSize());
         pageResult.setTotal(iPage.getTotal());
         // 构建记录

@@ -16,19 +16,19 @@ public class PageRequest {
     /**
      * 当前页码
      */
-    private Long curPage;
+    private Long pageNum;
     /**
      * 每页大小
      */
     private Long pageSize;
 
 
-    public Long getCurPage() {
-        return curPage;
+    public Long getPageNum() {
+        return pageNum;
     }
 
-    public void setCurPage(Long curPage) {
-        this.curPage = curPage;
+    public void setPageNum(Long pageNum) {
+        this.pageNum = pageNum;
     }
 
     public Long getPageSize() {
@@ -45,6 +45,6 @@ public class PageRequest {
      * @return
      */
     public long getOffset() {
-        return (curPage - 1) * pageSize;
+        return (pageNum - 1) * pageSize;
     }
 }
