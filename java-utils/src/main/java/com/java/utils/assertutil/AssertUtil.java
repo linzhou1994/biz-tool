@@ -23,6 +23,15 @@ import java.util.Objects;
 public class AssertUtil {
     public static final Logger LOGGER = LoggerFactory.getLogger(AssertUtil.class);
 
+    public static void isInEnumByCode(Object code, Class<?extends Enum> tClass, ErrorCode errorCode, Object... org) throws BizException {
+        Enum enumByCode = EnumUtil.getEnumByCode(code, tClass);
+        AssertUtil.isNotNull(enumByCode,errorCode,org);
+    }
+    public static void isInEnumByName(String enumName, Class<?extends Enum> tClass, ErrorCode errorCode, Object... org) throws BizException {
+        Enum enumByCode = EnumUtil.getEnumByName(enumName, tClass);
+        AssertUtil.isNotNull(enumByCode,errorCode,org);
+    }
+
     public static void inEnum(Class<? extends Enum<?>> clazz, String code, ErrorCode errorCode, Object... org) throws BizException {
         Enum enumByCode = EnumUtil.getEnumByCode(code, clazz);
         isNotNull(enumByCode, errorCode, org);
