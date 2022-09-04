@@ -2,8 +2,7 @@ package com.spring.lock.aspect;
 
 import com.java.utils.reflect.ReflectUtil;
 import com.spring.lock.DistributedLock;
-import com.spring.lock.annotations.Param;
-import com.spring.lock.param.LockParam;
+import com.spring.lock.annotations.LockParam;
 import com.spring.lock.result.BaseLockResult;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -52,8 +51,8 @@ public class LockAspect {
     }
     //获取分布式锁的key
     String redisKey = getRedisKey(joinPoint, key);
-    LockParam param = new LockParam(redisKey, lock.isReentrant(), lock.expireSeconds());
-    BaseLockResult lockResultBo = distributedLock.lock(param);
+    com.spring.lock.param.LockParam lockParam = new com.spring.lock.param.LockParam(redisKey, lock.isReentrant(), lock.expireSeconds());
+    BaseLockResult lockResultBo = distributedLock.lock(lockParam);
     try {
       if (Objects.isNull(lockResultBo)) {
         throw new IllegalAccessException("分布式锁获取失败，key：" + key);
@@ -136,7 +135,7 @@ public class LockAspect {
     for (int i = 0; i < args.length; i++) {
       Object arg = args[i];
       if (isBasicClass(arg)) {
-        Param param = ReflectUtil.getAnnotation(parameterAnnotations[i], Param.class);
+        LockParam param = ReflectUtil.getAnnotation(parameterAnnotations[i], LockParam.class);
         if (Objects.nonNull(param)) {
           rlt.add(new ParamInfo(arg, param.value(), param));
         }
@@ -145,7 +144,7 @@ public class LockAspect {
         for (ReflectUtil.ReflectField reflectField : allFieldAndValue) {
           Object value = reflectField.getValue();
           Field field = reflectField.getField();
-          Param param = field.getAnnotation(Param.class);
+          LockParam param = field.getAnnotation(LockParam.class);
 
           if (Objects.nonNull(param)){
             rlt.add(new ParamInfo(value, param.value(), param));
@@ -208,9 +207,9 @@ public class LockAspect {
   private static class ParamInfo {
     private Object value;
     private String fieldName;
-    private Param param;
+    private LockParam param;
 
-    public ParamInfo(Object value, String fieldName, Param param) {
+    public ParamInfo(Object value, String fieldName, LockParam param) {
       this.value = value;
       this.fieldName = fieldName;
       this.param = param;
@@ -232,11 +231,11 @@ public class LockAspect {
       this.fieldName = fieldName;
     }
 
-    public Param getParam() {
+    public LockParam getParam() {
       return param;
     }
 
-    public void setParam(Param param) {
+    public void setParam(LockParam param) {
       this.param = param;
     }
   }
