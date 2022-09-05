@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Configuration;
 public class DistributedLockConfig {
 
   @Bean
-  public LockAspect getLockAspect(){
+  public LockAspect lockAspect(){
     return new LockAspect();
   }
 }
