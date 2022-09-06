@@ -21,24 +21,24 @@ import java.util.List;
  */
 @Slf4j
 public class BeanCopy {
-    public static  <T> T copy(Object source,Class<T> target){
+    public static <T> T copy(Object source, Class<T> target) {
         try {
             T t = target.newInstance();
-            BeanUtils.copyProperties(source,t);
+            BeanUtils.copyProperties(source, t);
             return t;
         } catch (Exception e) {
-            log.error("bean copy error,source class:{},target class:{}",source.getClass(),target,e);
-           return null;
+            log.error("bean copy error,source class:{},target class:{}", source != null ? source.getClass() : null, target, e);
+            return null;
         }
     }
 
-    public static <T> List<T> copyList(List sources ,Class<T> target){
-        if (CollectionUtils.isEmpty(sources)){
+    public static <T> List<T> copyList(List sources, Class<T> target) {
+        if (CollectionUtils.isEmpty(sources)) {
             return Collections.emptyList();
         }
         List<T> rlt = new ArrayList<>(sources.size());
         for (Object source : sources) {
-            rlt.add(copy(source,target));
+            rlt.add(copy(source, target));
         }
         return rlt;
     }
