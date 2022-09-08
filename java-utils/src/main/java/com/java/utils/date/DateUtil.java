@@ -3,6 +3,9 @@ package com.java.utils.date;
 
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -172,6 +175,25 @@ public class DateUtil {
         calendar.set(Calendar.MILLISECOND, 0);
         return calendar.getTime();
     }
+
+    /**
+     * 获取今天的剩余时间
+     *
+     * @param unit 时间单位
+     * @return java.lang.Integer
+     * @author Galvin
+     * @date 2022/9/8 10:32
+     **/
+    public static Integer getRemainTimeOneDay(ChronoUnit unit) {
+        //使用plusDays将今天加1天，将时分秒设置成0
+        LocalDateTime currentDateTime = LocalDateTime.now(ZoneId.systemDefault());
+        LocalDateTime midnight = LocalDateTime.now(ZoneId.systemDefault()).plusDays(1)
+                .withHour(0).withMinute(0).withSecond(0).withNano(0);
+        //使用between方法，传入两个LocalDateTime对象即可得到相差的时间
+        long time = unit.between(currentDateTime, midnight);
+        return (int) time;
+    }
+
     /**
      * method : 24、把date的天数增加offset
      */
