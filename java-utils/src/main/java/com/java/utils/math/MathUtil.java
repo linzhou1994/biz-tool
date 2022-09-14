@@ -48,4 +48,45 @@ public class MathUtil {
         }
         return a + b;
     }
+
+    public static Integer sub(Integer a,Integer b){
+        if (Objects.isNull(a)) {
+            a = 0;
+        }
+        if (Objects.isNull(b)) {
+            b = 0;
+        }
+        return a - b;
+    }
+
+    public static Double sub(Double a,Double b){
+        if (Objects.isNull(a)) {
+            a = 0D;
+        }
+        if (Objects.isNull(b)) {
+            b = 0D;
+        }
+        return a - b;
+    }
+
+    public static Float sub(Float a,Float b){
+        if (Objects.isNull(a)) {
+            a = 0F;
+        }
+        if (Objects.isNull(b)) {
+            b = 0F;
+        }
+        return a - b;
+    }
+
+    public static Long sub(Long a,Long b){
+        if (Objects.isNull(a)) {
+            a = 0L;
+        }
+        if (Objects.isNull(b)) {
+            b = 0L;
+        }
+        return a - b;
+    }
+
 }
