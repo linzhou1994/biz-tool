@@ -1,6 +1,5 @@
 package com.java.utils.enums;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;
 
 /**
@@ -47,9 +46,9 @@ public class EnumUtil {
         T[] enumConstants = tClass.getEnumConstants();
 
         for (T enumItem : enumConstants) {
-            String enumCode = null;
+            Object enumCode = null;
             try {
-                enumCode = tClass.getMethod("getCode").invoke(enumItem).toString();
+                enumCode = tClass.getMethod("getCode").invoke(enumItem);
             } catch (Exception e) {
                 e.printStackTrace();
             }
